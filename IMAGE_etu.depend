@@ -1,0 +1,74 @@
+# depslib dependency file v1.0
+1485176288 source:z:\bureau\info1\tp_5_6_7\projetimage_etu2017\ihm.c
+	"IHM.h"
+	<stdlib.h>
+	<SDL2/SDL.h>
+	<stdio.h>
+
+1420493174 z:\bureau\info1\tp_5_6_7\projetimage_etu2017\ihm.h
+
+1575993651 source:z:\bureau\info1\tp_5_6_7\projetimage_etu2017\main.c
+	<stdlib.h>
+	<math.h>
+	"IHM.h"
+
+1485176288 source:c:\users\lilian\documents\iut\info1\tp5_6_7\projetimage_etu2017\ihm.c
+	"IHM.h"
+	<stdlib.h>
+	<SDL2/SDL.h>
+	<stdio.h>
+
+1420493174 c:\users\lilian\documents\iut\info1\tp5_6_7\projetimage_etu2017\ihm.h
+
+1576334619 source:c:\users\lilian\documents\iut\info1\tp5_6_7\projetimage_etu2017\main.c
+	<stdlib.h>
+	<math.h>
+	"IHM.h"
+
+1485176288 source:c:\users\lilian\desktop\iut\info1\tp5_6_7\projetimage_etu2017\ihm.c
+	"IHM.h"
+	<stdlib.h>
+	<SDL2/SDL.h>
+	<stdio.h>
+
+1420493174 c:\users\lilian\desktop\iut\info1\tp5_6_7\projetimage_etu2017\ihm.h
+
+1576407264 source:c:\users\lilian\desktop\iut\info1\tp5_6_7\projetimage_etu2017\main.c
+	<stdlib.h>
+	<math.h>
+	"IHM.h"
+
+1485176288 source:c:\users\lilian\desktop\iut\info1\tp_5_6_7\projetimage_etu2017\ihm.c
+	"IHM.h"
+	<stdlib.h>
+	<SDL2/SDL.h>
+	<stdio.h>
+
+1420493174 c:\users\lilian\desktop\iut\info1\tp_5_6_7\projetimage_etu2017\ihm.h
+
+1576518981 source:c:\users\lilian\desktop\iut\info1\tp_5_6_7\projetimage_etu2017\main.c
+	<stdlib.h>
+	<math.h>
+	"IHM.h"
+
+1485179888 source:c:\users\teaze\desktop\iut\semestre_1\ue11\info1\tp_5_6_7\projetimage_etu2017\ihm.c
+	"IHM.h"
+	<stdlib.h>
+	<SDL2/SDL.h>
+	<stdio.h>
+
+1420496774 c:\users\teaze\desktop\iut\semestre_1\ue11\info1\tp_5_6_7\projetimage_etu2017\ihm.h
+
+1615540206 source:c:\users\teaze\desktop\iut\semestre_1\ue11\info1\tp5_6_7\projetimage_etu2017\ihm.c
+	"IHM.h"
+	<stdlib.h>
+	<SDL2/SDL.h>
+	<stdio.h>
+
+1420493174 c:\users\teaze\desktop\iut\semestre_1\ue11\info1\tp5_6_7\projetimage_etu2017\ihm.h
+
+1615406468 source:c:\users\teaze\desktop\iut\semestre_1\ue11\info1\tp5_6_7\projetimage_etu2017\main.c
+	<stdlib.h>
+	<math.h>
+	"IHM.h"
+

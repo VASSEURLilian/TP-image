@@ -1,0 +1,186 @@
+#include <stdlib.h>
+#include <math.h>
+#include "IHM.h"
+
+// position de l'histogramme dans l'interface
+#define HISTO_L 525
+#define HISTO_B 580
+
+void set_pixel(unsigned char *im, unsigned short int c, unsigned short int l,int coul);
+void croix_blanche(unsigned char *im);
+void croix_noir(unsigned char *im);
+unsigned char get_pixel(unsigned char *im, unsigned short int c, unsigned short int l);
+void affichezoom(unsigned char *im, unsigned short int top,  unsigned short int, unsigned short int x, unsigned short int y, unsigned short int f);
+void affichehisto(unsigned int *histo);
+
+int main ( int argc, char** argv )
+{
+
+    // mes variables
+    char c;
+    unsigned char coul;
+    unsigned int histo[256];
+    unsigned int i;
+
+    // tableau contenant l'image
+    unsigned char mimage[HAUTEUR_IMAGE * LARGEUR_IMAGE];
+
+    //   ma position
+    int x;
+    int y;
+
+    // initialisation de la fenêtre
+    IHM_init();
+
+    // initialisation du tableau à partir du fichier image
+    IHM_charge_BMP(mimage, "lena_gray.bmp");
+    // copie du tableau dans l'affichage
+    IHM_set_image(mimage);
+
+    // boucle principale de l'IHM
+    while (!IHM_quitter())
+    {
+        // on commence par effacer
+        IHM_efface();
+
+
+        x = IHM_souris_x();
+        y = IHM_souris_y();
+        c = IHM_getChar();
+        //on initialise l'histogramme
+        for(i=0;i<=255;i++)
+        {
+            histo[i]=i;
+        }
+
+        // les traitements en fonction des caractères tapés
+        switch(c)
+        {
+        case 'b':
+            // faire la binarisation
+            break;
+        case 'l':
+            IHM_charge_BMP(mimage, "lena_gray.bmp");
+            IHM_set_image(mimage);
+            break;
+        case 'a':
+            IHM_charge_BMP(mimage, "archives.bmp");
+            IHM_set_image(mimage);
+            break;
+        case 'h':
+            // re-calculer l'histogramme
+            affichehisto(histo);
+            break;
+
+        }
+
+        // ajouter l'image :
+        IHM_affiche_image(10,10);
+
+        //modification avec set_pixel
+        croix_blanche(mimage);///partie 1
+        croix_noir(mimage);///partie 1
+
+
+
+        // position du zoom
+        IHM_rectangle(550,10,8*11,8*11,IHM_couleur(255,255,255));
+        affichezoom(mimage,550,10,x,y,8);
+
+        //postion du test
+        coul=get_pixel(mimage,x,y);///partie 2
+        IHM_rectangle(550,200, 8,8, IHM_couleur(coul,coul,coul));///partie 2
+
+
+
+        // position de l'histogramme
+        IHM_rectangle(HISTO_L,(HISTO_B - 110),110,256+10,IHM_couleur(255,255,255));
+
+
+        IHM_set_image(mimage);
+
+        // on met à jour l'affichage
+        IHM_affiche();
+    }
+    // fin de la boucle principale
+
+    return 0;
+}
+
+void set_pixel(unsigned char *im, unsigned short int c, unsigned short int l,int coul)
+{
+   im[c+l*LARGEUR_IMAGE]=coul;
+}
+
+void croix_blanche(unsigned char *im)
+{
+    int i;
+
+    for (i=0;i<=511;i++)
+    {
+        //set_pixel(im, i, 255, IHM_couleur(255,255,255));
+        set_pixel(im, i, 256, IHM_couleur(255,255,255));
+        //set_pixel(im, i, 257, IHM_couleur(255,255,255));
+        //set_pixel(im, 255, i, IHM_couleur(255,255,255));
+        set_pixel(im, 256, i, IHM_couleur(255,255,255));
+        //set_pixel(im, 257, i, IHM_couleur(255,255,255));
+    }
+}
+
+void croix_noir(unsigned char *im)
+{
+    int i;
+
+    for (i=0;i<512;i++)
+    {
+        set_pixel(im, i, i, IHM_couleur(0,0,0));
+        set_pixel(im, 511-i, i, IHM_couleur(0,0,0));
+    }
+}
+
+unsigned char get_pixel(unsigned char *im, unsigned short int c, unsigned short int l)
+{
+    int coul;
+    c=c-10;
+    l=l-10;
+    if (c<LARGEUR_IMAGE && l<LARGEUR_IMAGE)
+    {
+        coul=im[(c)+(l)*LARGEUR_IMAGE];
+    }
+    return coul;
+}
+
+void affichezoom(unsigned char *im, unsigned short int top,  unsigned short int left, unsigned short int x, unsigned short int y, unsigned short int f)
+{
+    unsigned char i;
+    unsigned char k;
+    int coul;
+
+    x=x-10;
+    y=y-10;
+    if (x<LARGEUR_IMAGE && y<LARGEUR_IMAGE)
+    {
+        x=x+5;
+        y=y+5;
+        for (i=0; i<=10;i++)
+        {
+            for(k=0; k<=10; k++)
+            {
+                coul=get_pixel(im,x+k,y+i);
+                IHM_rectangle(top+f*k, left+f*i, f, f, IHM_couleur(coul,coul,coul));
+            }
+        }
+    }
+}
+
+void affichehisto(unsigned int *histo)
+{
+    unsigned char i;
+
+    for(i=0;i<=255;i++)
+    {
+        IHM_rectangle(HISTO_L+1,HISTO_B,((histo[i]*100)/255),1,IHM_couleur(128,128,128));
+    }
+}
+
+
